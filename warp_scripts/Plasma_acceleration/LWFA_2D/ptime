@@ -1,0 +1,17 @@
+#!/usr/bin/env python -i
+from warp import *
+
+f=PR.PR('tottime.pdb')
+
+winon()
+
+def pt():
+  pla(f.time)
+  ptitles('','Iteration','Elapsed time [s]')
+  
+def pdt():
+  pla(f.time[1:]-f.time[:-1])
+  ptitles('','Iteration','Time per step [s]')
+
+plsys(9);pt()
+plsys(10);pdt()
