@@ -52,7 +52,7 @@ elif len(sys.argv) in [4,5]:
 
 os.system('./convertcgmtojpg '+file+' %g %g %g'%(framestart,frameend,framestep))
 os.chdir(prefix)
-os.system('./mkmovie -rate 12 '+prefix+'. '+prefix+'.mp4')
+os.system('../mkmovie -rate 12 '+prefix+'. '+prefix+'.mp4')
 os.system('mv '+prefix+'.mp4 ../')
 os.chdir('..')
 os.system('rm -fr '+prefix)
