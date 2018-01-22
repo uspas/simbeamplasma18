@@ -42,17 +42,17 @@ if len(sys.argv) == 3:
   frameend = numframes
   framestep = 1
 elif len(sys.argv) in [4,5]:
-  framestart = string.atoi(sys.argv[2])
-  frameend = string.atoi(sys.argv[3])
+  framestart = int(sys.argv[2])
+  frameend = int(sys.argv[3])
   if len(sys.argv) == 5:
-    framestep = string.atoi(sys.argv[4])
+    framestep = int(sys.argv[4])
   else:
     framestep = 1
   numframes = frameend - framestart + 1
 
-os.system('convertcgmtojpg '+file+' %g %g %g'%(framestart,frameend,framestep))
+os.system('./convertcgmtojpg '+file+' %g %g %g'%(framestart,frameend,framestep))
 os.chdir(prefix)
-os.system('mkmovie -rate 12 '+prefix+'. '+prefix+'.mp4')
+os.system('./mkmovie -rate 12 '+prefix+'. '+prefix+'.mp4')
 os.system('mv '+prefix+'.mp4 ../')
 os.chdir('..')
 os.system('rm -fr '+prefix)

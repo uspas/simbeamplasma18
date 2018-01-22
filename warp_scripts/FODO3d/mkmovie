@@ -25,11 +25,11 @@ argdict = {'format':'jpg',
 # --- get arguments
 for i,arg in enumerate(sys.argv):
   if arg[0]=='-':
-    if arg[1:] in argdict.keys():
+    if arg[1:] in list(argdict.keys()):
       argdict[arg[1:]] = sys.argv[i+1]
     else:
-      print '\n Error in argument list: '+arg+' is not a valid argument'
-      print usage
+      print('\n Error in argument list: '+arg+' is not a valid argument')
+      print(usage)
       raise('')
       
 input  = sys.argv[-2]
@@ -40,6 +40,6 @@ rate = int(argdict['rate'])
 
 #line = 'ffmpeg -y -b 5000 -r %g -i '%rate+input+fmt+'.'+format+' -strict -1 -qscale 1.0 '+output
 line = 'ffmpeg -y -r %g -i '%rate+input+fmt+'.'+format+' -strict -1 -qscale 1.0 '+output
-print line
+print(line)
 os.system(line)
-print 'done\n'
+print('done\n')
