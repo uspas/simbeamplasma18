@@ -25,9 +25,9 @@ import re
 
 # --- Print out usage line if needed.
 if len(sys.argv) < 3 or len(sys.argv) > 5:
-  print 'Error: command line had the wrong format, must be one of'
-  print 'cgmtomp4.py filename numframes'
-  print 'cgmtomp4.py filename framestart frameend framestep'
+  print('Error: command line had the wrong format, must be one of')
+  print('cgmtomp4.py filename numframes')
+  print('cgmtomp4.py filename framestart frameend framestep')
 
 # --- Get the filename
 file = sys.argv[1]
