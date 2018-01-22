@@ -1,0 +1,5 @@
+The lecture took less than 45 minutes.
+The class feedback slides worked well.
+One student said she would reference Victoria Stodden's work in her thesis.
+
+I should have warned the students during the lecture that they would need GitHub accounts for the computer lab after lunch. One student had a lot of trouble with GitHub and was stressed out.
