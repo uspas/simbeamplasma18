@@ -173,9 +173,9 @@ def plzprofiles(l_CL=True):
     if l_CL:pla(EzCL,zEz,color=red,width=4)
     pla(Ez,zEz,type='dash',width=3)
     if l_CL:
-        limits(0.,w3d.zmmax,minnd(EzCL),0.)
+        limits(0.,w3d.zmmax,0.,maxnd(EzCL))
     else:
-        limits(0.,w3d.zmmax,minnd(Ez),0.)
+        limits(0.,w3d.zmmax,0.,maxnd(Ez))
     ptitles('E_z^^ [V/m]','Z [m]','')
     
     # --- plot potential
