@@ -138,6 +138,11 @@ laser_antenna = LaserAntenna(laser,
                              circ_m=em.circ_m)
 em.laser_antenna.append( laser_antenna )
 
+def rotate(x,c,angle):
+    cr = cos(angle)
+    sr = sin(angle)
+    return c + (x-c)*array([cr,cr])+(x-c)[::-1]*array([-sr,sr])
+
 #-------------------------------------------------------------------------------
 # --- definition and installation of plotting routine
 #-------------------------------------------------------------------------------
@@ -151,17 +156,40 @@ def mkplots():
     else:
         pf = em.pfex
     fma();pf(direction=1,l_transpose=1,view=9,cmin=-laser_emax,cmax=laser_emax);
-    Zc = laser_position[2]
-    pldj([Zc],[w3d.xmmin],[Zc],[w3d.xmmax],color=green)
-    pldj([Zc+Zf],[w3d.xmmin],[Zc+Zf],[w3d.xmmax],color=magenta)
+    
+    # --- trace emission plane
+    angle = arctan2(laser_vector[0],laser_vector[2])    
+    ptc = array([laser_position[2],laser_position[0]])
+    pt1 = array([laser_position[2],w3d.xmmin*10])
+    pt2 = array([laser_position[2],w3d.xmmax*10])
+    
+    pt1 = rotate(pt1,ptc,angle)
+    pt2 = rotate(pt2,ptc,angle)
+    
+    pldj([pt1[0]],[pt1[1]],[pt2[0]],[pt2[1]],color=green)
+
+    # --- trace focus plane
+    ptc = array([laser_position[2]+Zf,laser_position[0]])
+    pt1 = array([laser_position[2]+Zf,w3d.xmmin*10])
+    pt2 = array([laser_position[2]+Zf,w3d.xmmax*10])
+    
+    pt1 = rotate(pt1,ptc,angle)
+    pt2 = rotate(pt2,ptc,angle)
+    
+    pldj([pt1[0]],[pt1[1]],[pt2[0]],[pt2[1]],color=magenta)
+
+    # --- if dielectric, trace dielectric box contours
     if er>1.:
         dielectric_box.draw()
+        
+    limits(w3d.zmmin,w3d.zmmax,w3d.xmmin,w3d.xmmax)
+
     # --- refresh window
     refresh()
 installafterstep(mkplots)
  
 # inject laser for some time
-step(nint(15*laser_duration/top.dt))  
+step(nint(15/2*laser_duration/top.dt))  
 
 if er==1. and all(laser_vector==array([0.,0.,1.])): 
     # --- if no dielectric and propagating along z, then compare to paraxial solution
